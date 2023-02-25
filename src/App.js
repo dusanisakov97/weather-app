@@ -1,17 +1,24 @@
 import React, { useState } from "react";
+import moment from "moment";
 import axios from "axios";
 import { FaCloud, FaSun, FaWind, FaBolt, FaCloudRain } from "react-icons/fa";
 
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
+  const [forecastData, setForecastData] = useState([]);
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=027f4794913f192299dbb1215eae8b58`;
+  const urlforecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=027f4794913f192299dbb1215eae8b58`;
 
   const searchLocation = (event) => {
     if (event.key === "Enter") {
       axios.get(url).then((response) => {
         setData(response.data);
+        console.log(response.data);
+      });
+      axios.get(urlforecast).then((response) => {
+        setForecastData(response.data.list);
         console.log(response.data);
       });
       setLocation("");
@@ -61,6 +68,23 @@ function App() {
             {data.weather ? <p>{data.weather[0].main}</p> : null}
           </div>
         </div>
+
+        {forecastData.length > 0 && (
+          <div className="forecast">
+            {forecastData.map(
+              (forecast, index) =>
+                index % 8 === 0 && (
+                  <div key={index} className="forecast-item">
+                    <p>{moment(forecast.dt_txt).format("ddd, MMM Do")}</p>
+                    <p>{forecast.main.temp.toFixed()}°C</p>
+                    <div className="forecast-icon">
+                      {getWeatherIcon(forecast.weather[0].main)}
+                    </div>
+                  </div>
+                )
+            )}
+          </div>
+        )}
 
         {data.name !== undefined && (
           <div className="bottom">

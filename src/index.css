@@ -22,6 +22,7 @@ h1 {
 }
 
 .app {
+  height: 100vh;
   width: 100%;
   position: relative;
   background-color: rgba(0, 0, 0, 0.4);
@@ -59,11 +60,9 @@ h1 {
 
 .container {
   max-width: 700px;
-  height: 700px;
   margin: 0 auto;
   padding: 0 1rem;
   position: relative;
-  top: 10%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -71,7 +70,7 @@ h1 {
 
 .app .top {
   width: 100%;
-  margin: 5rem auto;
+  margin: 2rem auto;
   text-align: center;
 }
 
@@ -89,7 +88,7 @@ h1 {
   justify-content: space-evenly;
   text-align: center;
   width: 100%;
-  margin: 5rem auto;
+  margin: 1rem auto;
   padding: 1rem;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.2);
@@ -97,4 +96,29 @@ h1 {
 
 .bold {
   font-weight: 700;
+}
+
+/* 5 day forecast */
+
+.forecast {
+  display: flex;
+  margin: 2rem auto;
+  justify-content: space-between;
+}
+
+.forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.forecast-item p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.forecast-icon {
+  font-size: 2rem;
+  margin-top: 1rem;
 }
